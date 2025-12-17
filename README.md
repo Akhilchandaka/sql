@@ -23,3 +23,5 @@ real-world SQL patterns used in analytics and data engineering projects.
 - Standard SQL
 - Git & GitHub
 - VS Code
+
+

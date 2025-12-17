@@ -177,4 +177,25 @@ END;
    ========================================================= */
 
 CALL dataset.load_employees();
---
+
+
+/* =====================================================
+   ADVANCED BIGQUERY PRACTICE – FEATURE BRANCH
+   ===================================================== */
+
+-- Top 3 salaries per department
+SELECT *
+FROM (
+  SELECT *,
+         DENSE_RANK() OVER (
+           PARTITION BY department_id
+           ORDER BY salary DESC
+         ) AS dept_rank
+  FROM dataset.employees
+)
+WHERE dept_rank <= 3;
+
+-- Employees hired in last 90 days
+SELECT *
+FROM dataset.employees
+WHERE DATE(joining_date) >= DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY);
